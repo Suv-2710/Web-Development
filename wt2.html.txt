@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .todo-container {
+      background: white;
+      width: 320px;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #007bff;
+    }
+    .input-group {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+    }
+    button {
+      padding: 8px 15px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      background: #f1f1f1;
+      margin-bottom: 8px;
+      padding: 8px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li.completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="todo-container">
+    <h2>To-Do List</h2>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Add a new task">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      let input = document.getElementById("taskInput");
+      let taskText = input.value.trim();
+
+      if (taskText === "") {
+        alert("Please enter a task!");
+        return;
+      }
+
+      let li = document.createElement("li");
+      li.textContent = taskText;
+
+      // Toggle completed task on click
+      li.onclick = function() {
+        li.classList.toggle("completed");
+      };
+
+      // Delete button
+      let delBtn = document.createElement("button");
+      delBtn.textContent = "×";
+      delBtn.className = "delete-btn";
+      delBtn.onclick = function() {
+        li.remove();
+      };
+
+      li.appendChild(delBtn);
+      document.getElementById("taskList").appendChild(li);
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>
